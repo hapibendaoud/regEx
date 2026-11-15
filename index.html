@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./output.css" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body class="bg-surface text-ink font-sans min-h-screen antialiased">
+
+    <header class="bg-white border-b border-gray-200 shadow-sm mb-8">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center gap-4">
+        <div class="shrink-0" aria-hidden="true">
+            <svg width="40" height="40" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="36" height="36" rx="8" fill="#059669" />
+            <path d="M10 13H26M18 13V25M12 21C14.5 23.5 21.5 23.5 24 21" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </div>
+        <div>
+            <span class="block text-xs font-semibold uppercase tracking-wider text-brand">
+            Association Tawassoul • Casablanca
+            </span>
+            <h1 class="text-xl sm:text-2xl font-bold text-ink">Participant Manager</h1>
+        </div>
+        </div>
+    </header>
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 pb-12 flex flex-col lg:flex-row items-start gap-7">
+        
+        <aside class="w-full lg:w-[370px] shrink-0 flex flex-col gap-6">
+        
+        <section class="bg-white rounded-xl p-6 shadow-md" aria-label="Participant Statistics">
+            <h2 class="text-lg font-semibold mb-4 text-ink">Overview</h2>
+            <div class="flex gap-4">
+            <div class="flex-1 bg-surface p-4 rounded-lg border-l-4 border-gray-600 flex flex-col">
+                <span class="text-xs font-medium text-gray-600">Total Registered</span>
+                <span id="total-count" class="text-3xl font-bold text-ink mt-1" aria-live="polite">0</span>
+            </div>
+            <div class="flex-1 bg-brand-light p-4 rounded-lg border-l-4 border-brand flex flex-col">
+                <span class="text-xs font-medium text-gray-700">Selected</span>
+                <span id="selected-count" class="text-3xl font-bold text-brand mt-1" aria-live="polite">0</span>
+            </div>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-xl p-6 shadow-md" aria-labelledby="form-heading">
+            <h2 id="form-heading" class="text-lg font-semibold mb-4 text-ink">Register Participant</h2>
+            <form id="participant-form" novalidate class="space-y-4">
+            
+            <div>
+                <label for="full-name" class="block text-sm font-medium text-ink mb-1">
+                Full Name <span class="text-red-600" aria-hidden="true">*</span>
+                </label>
+                <input 
+                type="text" 
+                id="full-name" 
+                name="fullName" 
+                placeholder="e.g., Yasmine Benali" 
+                autocomplete="name"
+                aria-describedby="name-error"
+                required
+                class="w-full min-h-[46px] px-3.5 py-2.5 text-sm text-ink bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand transition"
+                />
+                <span id="name-error" class="block text-xs font-medium text-red-600 min-h-[1.25rem] mt-1" role="alert" aria-live="assertive"></span>
+            </div>
+
+            <div>
+                <label for="training" class="block text-sm font-medium text-ink mb-1">
+                Training Course <span class="text-red-600" aria-hidden="true">*</span>
+                </label>
+                <select 
+                id="training" 
+                name="training"
+                class="w-full min-h-[46px] px-3.5 py-2.5 text-sm text-ink bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand transition"
+                >
+                <option value="Office">Office</option>
+                <option value="Web">Web</option>
+                <option value="Languages">Languages</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="email" class="block text-sm font-medium text-ink mb-1">
+                Email Address <span class="text-red-600" aria-hidden="true">*</span>
+                </label>
+                <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                placeholder="e.g., yasmine@example.ma" 
+                autocomplete="email"
+                aria-describedby="email-error"
+                required
+                class="w-full min-h-[46px] px-3.5 py-2.5 text-sm text-ink bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand transition"
+                />
+                <span id="email-error" class="block text-xs font-medium text-red-600 min-h-[1.25rem] mt-1" role="alert" aria-live="assertive"></span>
+            </div>
+
+            <button 
+                type="submit" 
+                id="add-btn" 
+                class="w-full min-h-[46px] bg-brand hover:bg-brand-dark text-white font-semibold text-sm py-3 px-4 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand transition cursor-pointer"
+            >
+                + Add Participant
+            </button>
+            </form>
+        </section>
+        </aside>
+
+        <section class="w-full flex-1 min-w-0 flex flex-col gap-6">
+        
+        <div class="bg-white rounded-xl p-6 shadow-md flex flex-col gap-4">
+            <div>
+            <label for="search-input" class="sr-only">Search participants by name or email</label>
+            <input 
+                type="search" 
+                id="search-input" 
+                placeholder="Search by name or email..." 
+                class="w-full min-h-[46px] px-4 py-2.5 text-sm text-ink bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand transition"
+            />
+            </div>
+
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+            <div class="flex flex-wrap gap-2" role="group" aria-label="Filter by training course">
+                <button type="button" class="btn-filter flex-1 md:flex-none min-h-[44px] md:min-h-[38px] px-4 py-1.5 text-sm font-medium rounded-full border transition cursor-pointer bg-brand text-white border-brand" data-filter="All">All</button>
+                <button type="button" class="btn-filter flex-1 md:flex-none min-h-[44px] md:min-h-[38px] px-4 py-1.5 text-sm font-medium rounded-full border transition cursor-pointer bg-white text-ink border-gray-300 hover:border-brand" data-filter="Office">Office</button>
+                <button type="button" class="btn-filter flex-1 md:flex-none min-h-[44px] md:min-h-[38px] px-4 py-1.5 text-sm font-medium rounded-full border transition cursor-pointer bg-white text-ink border-gray-300 hover:border-brand" data-filter="Web">Web</button>
+                <button type="button" class="btn-filter flex-1 md:flex-none min-h-[44px] md:min-h-[38px] px-4 py-1.5 text-sm font-medium rounded-full border transition cursor-pointer bg-white text-ink border-gray-300 hover:border-brand" data-filter="Languages">Languages</button>
+            </div>
+
+            <button 
+                type="button" 
+                id="delete-selected-btn" 
+                disabled
+                class="min-h-[46px] md:min-h-[38px] px-4 py-2 text-sm font-semibold rounded-lg text-white bg-red-600 hover:bg-red-700 disabled:bg-gray-200 disabled:text-gray-500 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-600 transition cursor-pointer"
+            >
+                Delete Selection
+            </button>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-xl p-6 shadow-md">
+            <div class="flex items-center justify-between pb-3 mb-4 border-b border-gray-100">
+            <h2 class="text-lg font-semibold text-ink">Registered Participants</h2>
+            <label class="flex items-center gap-2 text-sm text-gray-600 cursor-pointer select-none min-h-[44px] md:min-h-0">
+                <input 
+                type="checkbox" 
+                id="select-all-checkbox" 
+                class="w-5 h-5 md:w-4 md:h-4 accent-brand rounded cursor-pointer"
+                />
+                <span>Select visible</span>
+            </label>
+            </div>
+
+            <ul id="list" class="flex flex-col gap-3" aria-label="List of registered participants">
+            </ul>
+
+            <p id="empty-state" class="hidden text-center text-sm text-gray-500 py-8">
+            No participants found. Add a participant or adjust your filters.
+            </p>
+        </div>
+
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
